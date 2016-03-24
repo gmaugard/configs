@@ -25,6 +25,7 @@ set omnifunc=syntaxcomplete#Complete	" Active l'autocompletion
 
 " Init Vundle
 """""""""""""""""
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
