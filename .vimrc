@@ -4,7 +4,7 @@
 " Github :gmaugard
 "
 """"""""""""""""""""""""""""""""""""""""
-			
+
 	
 """"""""""""""""""""""""""""""""""""""""
 " General
@@ -31,22 +31,26 @@ call vundle#begin()
 
 " List Plugin
 """""""""""""""""
-Plugin 'VundleVim/Vundle.vim'			" Installe vundle
-Plugin 'tpope/vim-fugitive'			" Ajout les commandes Git dans Vim
-Plugin 'tpope/vim-surround'			" Permet le remplacements de balise
-Plugin 'ctrlpvim/ctrlp.vim'			" Finder pour vim
-Plugin 'scrooloose/nerdcommenter'		" Commentaire en raccourcis
-Plugin 'scrooloose/nerdtree'			" Affiche un arbre de navigation
-Plugin 'scrooloose/syntastic'			" Verificateur de syntaxe
-Plugin 'majutsushi/tagbar'			" Affichage des différents tags dans une barre
-Plugin 'vim-airline/vim-airline'		" Ajoute une barre de notifications 
-Plugin 'vim-airline/vim-airline-themes'		" Prends en charge des themes pour Airline
-Plugin 'nanotech/jellybeans.vim'		" Theme Jelly Beans
-Plugin 'airblade/vim-gitgutter'			" Affiche les modifications git
-Plugin 'terryma/vim-multiple-cursors'		" Multiple curseurs		
-Plugin 'MarcWeber/vim-addon-mw-utils'		" 
-Plugin 'tomtom/tlib_vim'			" 
-Plugin 'garbas/vim-snipmate'			" Autocompletion
+Plugin 'VundleVim/Vundle.vim'				" Installe vundle
+Plugin 'tpope/vim-fugitive'				" Ajout les commandes Git dans Vim
+Plugin 'tpope/vim-surround'				" Permet le remplacements de balise
+Plugin 'ctrlpvim/ctrlp.vim'				" Finder pour vim
+Plugin 'scrooloose/nerdtree'				" Affiche un arbre de navigation
+Plugin 'scrooloose/syntastic'				" Verificateur de syntaxe
+Plugin 'majutsushi/tagbar'				" Affichage des différents tags dans une barre
+Plugin 'vim-airline/vim-airline'			" Ajoute une barre de notifications 
+Plugin 'vim-airline/vim-airline-themes'			" Prends en charge des themes pour Airline
+Plugin 'nanotech/jellybeans.vim'			" Theme Jelly Beans
+Plugin 'airblade/vim-gitgutter'				" Affiche les modifications git
+Plugin 'terryma/vim-multiple-cursors'			" Multiple curseurs		
+Plugin 'garbas/vim-snipmate'				" Autocompletion
+Plugin 'MarcWeber/vim-addon-mw-utils'			" Snipmate - dependance
+Plugin 'tomtom/tlib_vim'				" Snipmate - dependance
+Plugin 'honza/vim-snippets'				" Snipmate - dependance
+Plugin 'junegunn/goyo.vim'
+Plugin 'raimondi/delimitmate'
+
+" Plugin 'shougo/vimshell.vim'				" Add vim shell
 
 call vundle#end()
 filetype plugin indent on
@@ -57,6 +61,13 @@ filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""
 set t_Co=256
 colorscheme jellybeans
+let g:jellybeans_overrides = {
+			\    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
+			\              'ctermfg': 'Black', 'ctermbg': 'Yellow',
+			\              'attr': 'bold' },
+			\}
+let g:jellybeans_use_term_background_color = 1
+
 
 
 """"""""""""""""""""""""""""""""""""""""
@@ -75,39 +86,45 @@ set laststatus=2					" Affiche la ligne de status
 set listchars=tab:▸\ ,eol:¬,trail:\•			" Affiche les tabulations, les espaces et les retours chariots
 " set statusline=%l\|%c\ %m%=%p%%\ (%Y%R)		
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+set splitright
+
 
 " syntax enable
 """"""""""""""""""""""""""""""""""""""""
 " Indentation
 """"""""""""""""""""""""""""""""""""""""
-set tabstop=4					" Definie la longueur d'une tabulation
-set softtabstop=0				" Nombre d'espace inserer quand on press tab
-set noexpandtab
-set smartindent					" Indentation intelligents
-set autoindent					" Conserve l'identation sur la ligne
+ set tabstop=4					" Definie la longueur d'une tabulation
+ set shiftwidth=4
+ set softtabstop=0				" Nombre d'espace inserer quand on press tab
+ set noexpandtab
+ set smartindent				" Indentation intelligents
+ set autoindent					" Conserve l'identation sur la ligne
 
 
 """"""""""""""""""""""""""""""""""""""""
 " Recherche
 """"""""""""""""""""""""""""""""""""""""
-set ignorecase						" Ignore la casse lors de la recherche
-set smartcase						" Ignore la casse sauf si il y a une majuscules dans la saisie
-set incsearch						" Place le curseur sur le résultat
-set hlsearch						" Surligne les resultats de recherche
-set backspace=indent,eol,start				" Retour Arriere intelligent	
+set ignorecase				" Ignore la casse lors de la recherche
+set smartcase				" Ignore la casse sauf si il y a une majuscules dans la saisie
+set incsearch				" Place le curseur sur le résultat
+set hlsearch				" Surligne les resultats de recherche
+set backspace=indent,eol,start		" Retour Arriere intelligent	
 
 
 """"""""""""""""""""""""""""""""""""""""
 " Raccourcis
 """"""""""""""""""""""""""""""""""""""""
-map <C-m> :resize<CR>			" Ctrl-m maximize la fenetre courrante (:help map) 
-map <C-n> :bn<CR>			" Ctrl-b aller au buffer suivant (:help map)
-map <C-b> :bp<CR>			" Ctrl-b aller au buffer précédent (:help map)
-map <F2> :wincmd w<CR>			" F2 pour changer de fenêtre
-map <F3> :NERDTreeToggle<CR>		" F3 pour afficher NERDTree
-map <F4> :TagbarToggle<CR>		" F4 pour afficher Tagbar
-set pastetoggle=<F5>			" Annule l'indentation lors d'un coller
-nnoremap <F6> :set list!<CR>		" Affiche les caractère imprimable
+map <C-m> :resize<CR>
+map <C-k> :CtrlP<CR>
+map <C-b> :bn<CR>
+map <C-v> :bp<CR>
+map <F2> :wincmd w<CR>
+map <F3> :NERDTreeToggle<CR>
+map <F4> :TagbarToggle<CR>
+nnoremap <F6> :set list!<CR>
+noremap <F7> :Goyo<CR>
+
+set pastetoggle=<F5>			" F5 active paste mode, annule l'indentation lors d'un coller
 
 
 """"""""""""""""""""""""""""""""""""""""
@@ -131,3 +148,16 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1				
 let g:syntastic_check_on_wq = 0
+
+
+""""""""""""""""""""""""""""""""""""""""
+" CtrlP
+""""""""""""""""""""""""""""""""""""""""
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip	" Ignore certain type de fichier
+
+""""""""""""""""""""""""""""""""""""""""
+" Snipmate
+""""""""""""""""""""""""""""""""""""""""
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
