@@ -5,7 +5,7 @@ Config VIMRC
 
 Copy vimrc into your user directory : 
 ```
-curl http://raw.githubusercontent.com/gmaugard/dotfiles/master/.vimrcuts markdown.to_html > ~/.vimrc
+curl https://raw.githubusercontent.com/gmaugard/dotfiles/master/.vimrc > ~/.vimrc
 ```
 
 
