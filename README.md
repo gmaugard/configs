@@ -1,9 +1,3 @@
-README
-----------
-
-Bienvenue sur le projet On the Move, et merci pour ta contribution ! :D
-
-
 Config VIMRC
 -------------
 
@@ -32,6 +26,8 @@ Quit and relaunch vim.
 
 Enjoy !! :D
 
+
+### Plugin List
 
 Makefile
 -------------
